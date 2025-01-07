@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/granite_store', {
+mongoose.connect('mongodb://localhost:27017/TSS', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
@@ -55,10 +55,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
-
-/* Steps to Run the Project:
-1. Install dependencies: npm install express mongoose body-parser
-2. Start MongoDB server: Run 'mongod' in a separate terminal
-3. Add product data to the MongoDB database manually or via a separate script
-4. Start the server: node app.js
-5. Open http://localhost:3000 in the browser */
