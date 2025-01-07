@@ -9,7 +9,8 @@ const productSchema = new mongoose.Schema({
     image: String,
     status: String,
     Num_id: Number,
-    Name_id: String
+    Name_id: String,
+    color: String,
 });
 
 // Export the model
