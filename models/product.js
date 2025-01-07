@@ -14,4 +14,4 @@ const productSchema = new mongoose.Schema({
 });
 
 // Export the model
-module.exports = mongoose.model('Granite', productSchema, 'Rock_Samples.Granite');
+module.exports = mongoose.model('Rock_Samples', productSchema, 'products');

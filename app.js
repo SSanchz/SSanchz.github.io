@@ -1,4 +1,3 @@
-
 // Import required modules
 const express = require('express');
 const mongoose = require('mongoose');
@@ -26,6 +25,7 @@ const productSchema = new mongoose.Schema({
     Num_id: Number,
     Name_id: String,
     color: String,
+    thickness: String, // Add thickness field
 });
 
 const Product = mongoose.model('Product', productSchema);
@@ -50,11 +50,31 @@ app.get('/api/products', async (req, res) => {
     }
 });
 
+app.get('/api/products/:id', async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+        res.json(product);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch product' });
+    }
+});
 
 // Serve the frontend
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'home.html'));
 });
+
+app.get('/products', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'products.html'));
+});
+
+app.get('/contact', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'contact.html'));
+});
+
 
 // Start the server
 const PORT = process.env.PORT || 3000;
