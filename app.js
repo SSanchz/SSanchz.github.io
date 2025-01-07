@@ -19,12 +19,17 @@ mongoose.connect('mongodb+srv://dbUser:dbPass@cluster0.fx7yg.mongodb.net/Rock_Sa
 // Define a Product schema and model
 const productSchema = new mongoose.Schema({
     name: String,
-    color: String,
+    description: String,
+    price: String,
     image: String,
-    description: String
+    status: String,
+    Num_id: Number,
+    Name_id: String,
+    color: String,
 });
 
 const Product = mongoose.model('Product', productSchema);
+
 
 // Middleware
 app.use(bodyParser.json());
@@ -36,7 +41,7 @@ app.get('/api/products', async (req, res) => {
         const colorFilter = req.query.color;
         let query = {};
         if (colorFilter) {
-            query.color = colorFilter;
+            query.color = new RegExp(colorFilter, 'i'); // Case-insensitive regex
         }
         const products = await Product.find(query);
         res.json(products);
@@ -44,6 +49,7 @@ app.get('/api/products', async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch products' });
     }
 });
+
 
 // Serve the frontend
 app.get('*', (req, res) => {
