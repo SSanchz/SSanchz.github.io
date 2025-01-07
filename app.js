@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/TSS', {
+mongoose.connect('mongodb+srv://<dbUser>:<dbPass>@cluster0.fx7yg.mongodb.net/Rock_Samples?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
